@@ -18,9 +18,9 @@ const port = 7979;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.use(expressLayouts);
-// //app.set('layout', 'layouts/default');
-// app.set('layout extractScripts', true);
+app.use(expressLayouts);
+app.set('layout', 'layouts/default');
+app.set('layout extractScripts', true);
 
 app.use(session({secret: 'helloworld12345678', resave:false, saveUninitialized:false, cookie: { maxAge: 60000000 }}));
 //app.use(flash());
