@@ -8,7 +8,7 @@ var expressLayouts = require('express-ejs-layouts');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ilearning');
 
-//const product = require('./routes/product');
+const users = require('./routes/users');
 
 const app = express();
 
@@ -32,6 +32,7 @@ app.use(bodyParser.json());
 
 // ROUTES FOR OUR API
 app.use('/', require('./routes'));
+app.use('/users', users);
 
 app.use(express.static(path.join(__dirname,'public')));
 
