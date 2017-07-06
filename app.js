@@ -9,6 +9,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ilearning');
 
 const users = require('./routes/users');
+const Courses = require('./routes/courses');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(bodyParser.json());
 // ROUTES FOR OUR API
 app.use('/', require('./routes'));
 app.use('/users', users);
+app.use('/Courses', Courses);
 
 app.use(express.static(path.join(__dirname,'public')));
 
