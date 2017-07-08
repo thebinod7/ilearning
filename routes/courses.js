@@ -27,4 +27,11 @@ router.get('/content',function (req,res) {
       res.render('Courses/content', data);
 });
 
+router.get('/listings',function(req,res) {
+  const data = {
+    title : 'Course Listing'
+  }
+  res.render('courses/listings',data);
+});
+
 module.exports = router;
