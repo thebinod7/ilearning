@@ -20,4 +20,11 @@ router.get('/add',function (req,res) {
       res.render('Courses/add', data);
 });
 
+router.get('/content',function (req,res) {
+  const data = Object.assign(dashboardLayoutData, {
+        title:  'Add Content - Dashboard'
+      });
+      res.render('Courses/content', data);
+});
+
 module.exports = router;

@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/ilearning');
 
 const users = require('./routes/users');
 const Courses = require('./routes/courses');
+const admin = require('./routes/admin');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(bodyParser.json());
 app.use('/', require('./routes'));
 app.use('/users', users);
 app.use('/Courses', Courses);
+app.use('/admin',admin);
 
 app.use(express.static(path.join(__dirname,'public')));
 
