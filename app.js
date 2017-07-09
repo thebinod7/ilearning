@@ -14,7 +14,7 @@ const admin = require('./routes/admin');
 
 const app = express();
 
-const port=Number(process.env.PORT || 7979);
+var port=Number(process.env.PORT || 7979);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
