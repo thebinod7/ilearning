@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engines": {
    "node": "6.9.1",
-    "npm": "2.1.x"
+    "npm": "3.10.x"
   },
   "description": "Interactive Learning",
   "main": "app.js",
