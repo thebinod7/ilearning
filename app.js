@@ -6,7 +6,7 @@ const session = require('express-session');
 var expressLayouts = require('express-ejs-layouts');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/ilearning');
+//mongoose.connect('mongodb://localhost/ilearning');
 
 const users = require('./routes/users');
 const Courses = require('./routes/courses');
