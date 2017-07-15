@@ -79,7 +79,6 @@ router.get('/dashboard', auth, function (req,res) {
             title:  'User - Dashboard',
             user: doc
           });
-          console.log(data.user);
           res.render('users/dashboard', data);
     }
 });
@@ -174,7 +173,6 @@ router.post('/update/:id',function (req,res) {
       const payload = Object.assign({}, req.body, {
 
       });
-      console.log(payload);
       Users.findOneAndUpdate({ _id: req.params.id }, { $set: payload }, (err) => {
         if(err) {
           req.flash('error', 'ERROR! Failed to update profile');

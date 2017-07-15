@@ -7,7 +7,8 @@ const flash = require('express-flash');
 var expressLayouts = require('express-ejs-layouts');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/ilearning');
+//mongoose.connect('mongodb://localhost/ilearning');
+mongoose.connect('mongodb://develop:temp1234@ds159662.mlab.com:59662/ilearning');
 
 const users = require('./routes/users');
 const courses = require('./routes/courses');
