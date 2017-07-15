@@ -3,7 +3,15 @@
 <section class="profile">
     <div class="container">
         <h3 class="md black">Profile</h3>
+        <% if(messages.error) { %>
+                  <div class="alert alert-danger" style="<%= messages.error ? 'margin-top:20px;' : 'display: none' %>"><strong><%= messages.error ? messages.error[0] : '' %></strong></div>
+                  <% } %>
+
+                  <% if(messages.success) { %>
+                    <div class="alert alert-success" style="<%= messages.success ? 'margin-top:20px;' : 'display: none' %>"><strong><%= messages.success ? messages.success[0] : '' %></strong></div>
+          <% } %>
         <div class="row">
+          <form id="profileForm" method="Post" action="/users/update/<%= user._id %>">
             <div class="col-md-9">
                 <div class="avatar-acount">
                     <div class="changes-avatar">
@@ -11,15 +19,17 @@
                             <img src="/images/team-13.jpg" alt="">
                         </div>
                         <div class="choses-file up-file">
-                            <input type="file">
-                            <input type="hidden">
-                            <a href="#" class="mc-btn btn-style-6">Changes image</a>
+                          <% if(user.profilePicUrl) { %>
+                            <input type="hidden" name="profilePicUrl" value="<%= user.profilePicUrl %>">
+                            <% } %>
+                            <input type="file" name="profilePicUrl">
+                            <a href="#" class="mc-btn btn-style-6">Change image</a>
                         </div>
                     </div>
                     <div class="info-acount">
                         <h3 class="md black"><%= user.firstName %> <%= user.lastName %></h3>
                         <label class="pull-right">Bio</label>
-                        <textarea name="bio"></textarea>
+                        <textarea name="bio" placeholder="Write something about yourself..."><%= user.bio %></textarea>
                         <div class="security">
                             <div class="tittle-security">
                                 <h5>Firstname</h5>
@@ -43,38 +53,29 @@
             <div class="col-md-3">
                 <div class="social-connect">
                     <h5>Social connect</h5>
-                    <ul>
-                        <li>
-                            <a href="#" class="twitter">
-                                <i class="icon md-twitter"></i>
-                                <p>https://www.facebook.com/</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="facebook">
-                                <i class="icon md-facebook-1"></i>
-                                <p>https://www.facebook.com/</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="gg-plus">
-                                <i class="icon md-google-plus"></i>
-                                <p>https://www.facebook.com/</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="printerest">
-                                <i class="icon md-pinterest-1"></i>
-                                <p>https://www.facebook.com/</p>
-                            </a>
-                        </li>
-                    </ul>
                     <div class="add-link">
-                        <i class="icon md-plus"></i>
-                        <input type="text" placeholder="paste link here">
+                        <i class="icon md-facebook-1"></i>
+                        <input type="text" name="facebookUrl" placeholder="paste link here">
+                    </div>
+                    <div class="add-link">
+                        <i class="icon icon md-twitter"></i>
+                        <input type="text" name="twitterUrl" placeholder="paste link here">
+                    </div>
+                    <div class="add-link">
+                        <i class="icon fa fa-instagram"></i>
+                        <input type="text" name="instagramUrl" placeholder="paste link here">
+                    </div>
+                    <div class="add-link">
+                        <i class="icon md-google-plus"></i>
+                        <input type="text" name="googlePlusUrl" placeholder="paste link here">
+                    </div>
+                    <div class="add-link">
+                        <i class="icon fa fa-linkedin"></i>
+                        <input type="text" name="linkedinUrl" placeholder="paste link here">
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </section>

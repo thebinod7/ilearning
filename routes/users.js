@@ -4,12 +4,32 @@ const nodemailer = require('nodemailer');
 const session = require('express-session');
 const Users = require('../models/users');
 const auth = require('../utils/auth').auth;
+const multer  = require('multer');
+
+var storage = multer.diskStorage({
+  destination: './public/assets/img/uploads/',
+  filename (req, file, cb) {
+    cb(null,
+      file.fieldname + '-' + Date.now() + '.' +
+      file.originalname.split('.')[file.originalname.split('.').length - 1]
+    );
+  }
+});
+
+const upload = multer({ storage });
+
+router.post('/uploadImg', upload.single('file'), function(req, res) {
+  res.json({
+    error: false,
+    result: req.file.filename
+  });
+});
 
 var sendEmail = function (dest,name,uniqueId,purpose) {
   var content,sub;
   if(purpose === 'signup') {
     sub = 'User registration ✔';
-    content = '<b>Congratulations '+ name +', you have been registered to LMS.</b><br><a href="http://localhost:7979">Learn Something New today!</a>' // html body
+    content = '<b>Congratulations '+ name +', you have been registered to LMS.</b><br><a href="http://localhost:7979/courses/listings">Learn Something New today!</a>' // html body
   } else if(purpose === 'forgotPass') {
     sub = 'Forgot Password Recovery ✔';
     content = '<b>Hi '+ name +', you have made a request to recover password.</b><br><a href="http://localhost:7979/users/forgot/'+ uniqueId +'">Click here to reset your password</a>' // html body
@@ -59,6 +79,7 @@ router.get('/dashboard', auth, function (req,res) {
             title:  'User - Dashboard',
             user: doc
           });
+          console.log(data.user);
           res.render('users/dashboard', data);
     }
 });
@@ -147,6 +168,21 @@ router.post('/login',function (req,res) {
             }
         });
     });
+});
+
+router.post('/update/:id',function (req,res) {
+      const payload = Object.assign({}, req.body, {
+
+      });
+      console.log(payload);
+      Users.findOneAndUpdate({ _id: req.params.id }, { $set: payload }, (err) => {
+        if(err) {
+          req.flash('error', 'ERROR! Failed to update profile');
+          res.redirect('/users/dashboard');
+        }
+        req.flash('success', 'SUCCESS! Profile updated successfully!');
+        res.redirect('/users/dashboard');
+      });
 });
 
 router.get('/logout', (req, res) => {
