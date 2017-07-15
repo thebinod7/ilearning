@@ -37,23 +37,26 @@
 
             <!-- LIST ACCOUNT INFO -->
             <ul class="list-account-info">
+              <% if (!locals.user) { %>
                 <li class="list-item account">
                   <a href="/users/login">Login</a>
-                    <!-- <div class="account-info item-click">
-                        <img src="images/team-13.jpg" alt="">
-                    </div>
-                    <div class="toggle-account toggle-list">
-                        <ul class="list-account">
-                            <li><a href="setting.html"><i class="icon md-config"></i>Setting</a></li>
-                            <li><a href="login.html"><i class="icon md-arrow-right"></i>Sign Out</a></li>
-                        </ul>
-                    </div> -->
                 </li>
 
                 <li class="list-item account">
                   <a href="/users/signup">Signup</a>
                 </li>
-
+                <% } else { %>
+                  <div class="account-info item-click">
+                      <img src="/images/team-13.jpg" alt="">
+                  </div>
+                  <div class="toggle-account toggle-list">
+                      <ul class="list-account">
+                          <li><a href="/users/dashboard"><i class="fa fa-pencil"></i> Profile</a></li>
+                          <li><a href="/courses/my"><i class="fa fa-book"></i> Courses</a></li>
+                          <li><a href="/users/logout"><i class="icon md-arrow-right"></i>Sign Out</a></li>
+                      </ul>
+                  </div>
+                  <% } %>
 
             </ul>
             <!-- END / LIST ACCOUNT INFO -->

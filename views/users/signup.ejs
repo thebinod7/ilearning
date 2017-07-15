@@ -9,28 +9,35 @@
 
             <!-- FORM -->
             <div class="col-lg-4 pull-right">
+              <% if(messages.error) { %>
+                        <div class="alert alert-danger" style="<%= messages.error ? 'margin-top:20px;' : 'display: none' %>"><strong><%= messages.error ? messages.error[0] : '' %></strong></div>
+                        <% } %>
+
+                        <% if(messages.success) { %>
+                          <div class="alert alert-success" style="<%= messages.success ? 'margin-top:20px;' : 'display: none' %>"><strong><%= messages.success ? messages.success[0] : '' %></strong></div>
+                <% } %>
                 <div class="form-login">
-                    <form>
+                    <form id="signupForm" method="Post" action="/users/signup">
                         <h2 class="text-uppercase">sign up</h2>
                         <div class="form-fullname">
-                            <input class ="first-name"type="text" placeholder="First name">
-                            <input class="last-name" type="text" placeholder="Last name">
+                            <input class="first-name" name="firstName" type="text" placeholder="First name" required="required">
+                            <input class="last-name" name="lastName" type="text" placeholder="Last name" required="required">
                         </div>
                         <div class="form-datebirth">
-                            <input type="text" placeholder="Date of Birth">
+                            <input type="number" name="phone" placeholder="Phone number" required="required">
                         </div>
                         <div class="form-email">
-                            <input type="text" placeholder="Email">
+                            <input type="email" name="email" placeholder="Email" required="required">
                         </div>
                         <div class="form-password">
-                            <input type="password" placeholder="Password">
+                            <input type="password" name="password" placeholder="Enter strong password" required="required">
                         </div>
 
                         <div class="form-submit-1">
                             <input type="submit" value="Become a member" class="mc-btn btn-style-1">
                         </div>
                         <div class="link">
-                            <a href="/login">
+                            <a href="/users/login">
                                 <i class="icon md-arrow-right"></i>Already have account ? Log in
                             </a>
                         </div>
