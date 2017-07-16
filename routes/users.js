@@ -18,12 +18,13 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/uploadImg', upload.single('file'), function(req, res) {
-  res.json({
-    error: false,
-    result: req.file.filename
-  });
-});
+// router.post('/uploadImg', upload.single('file'), function(req, res) {
+//   console.log('Hello');
+//   res.json({
+//     error: false,
+//     result: req.file.filename
+//   });
+// });
 
 var sendEmail = function (dest,name,uniqueId,purpose) {
   var content,sub;
@@ -79,6 +80,7 @@ router.get('/dashboard', auth, function (req,res) {
             title:  'User - Dashboard',
             user: doc
           });
+          console.log(data.user);
           res.render('users/dashboard', data);
     }
 });
@@ -169,10 +171,13 @@ router.post('/login',function (req,res) {
     });
 });
 
-router.post('/update/:id',function (req,res) {
+router.post('/update/:id', upload.single('profilePicUrl'), function (req,res) {
+      const profilePicUrl = req.file ? req.file.filename : req.body.profilePicUrl;
+      console.log(req.body.profilePicUrl);
       const payload = Object.assign({}, req.body, {
-
+        profilePicUrl
       });
+    //  console.log(payload);
       Users.findOneAndUpdate({ _id: req.params.id }, { $set: payload }, (err) => {
         if(err) {
           req.flash('error', 'ERROR! Failed to update profile');

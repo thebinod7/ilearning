@@ -47,7 +47,7 @@
                 </li>
                 <% } else { %>
                   <div class="account-info item-click">
-                      <img src="/images/team-13.jpg" alt="">
+                      <img src="<%= locals.user.profilePicUrl ? '/assets/img/uploads/'+ locals.user.profilePicUrl : '/images/team-13.jpg'%>" alt="">
                   </div>
                   <div class="toggle-account toggle-list">
                       <ul class="list-account">

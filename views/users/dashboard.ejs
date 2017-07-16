@@ -11,17 +11,14 @@
                     <div class="alert alert-success" style="<%= messages.success ? 'margin-top:20px;' : 'display: none' %>"><strong><%= messages.success ? messages.success[0] : '' %></strong></div>
           <% } %>
         <div class="row">
-          <form id="profileForm" method="Post" action="/users/update/<%= user._id %>">
+          <form id="profileForm" method="Post" enctype="multipart/form-data" action="/users/update/<%= user._id %>">
             <div class="col-md-9">
                 <div class="avatar-acount">
                     <div class="changes-avatar">
                         <div class="img-acount">
-                            <img src="/images/team-13.jpg" alt="">
+                            <img src="<%= user.profilePicUrl ? '/assets/img/uploads/'+ user.profilePicUrl : '/images/team-13.jpg'%>" alt="">
                         </div>
                         <div class="choses-file up-file">
-                          <% if(user.profilePicUrl) { %>
-                            <input type="hidden" name="profilePicUrl" value="<%= user.profilePicUrl %>">
-                            <% } %>
                             <input type="file" name="profilePicUrl">
                             <a href="#" class="mc-btn btn-style-6">Change image</a>
                         </div>
