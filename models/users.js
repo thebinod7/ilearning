@@ -75,7 +75,6 @@ module.exports.changePassword = function (existUser,callback) {
 
 module.exports.resetPassword = function(existUser, cb) {
   bcrypt.genSalt(10, function(err, salt) {
-    console.log(existUser.password);
       bcrypt.hash(existUser.password, salt, function(err, hash) {
           if (err) throw err;
           existUser.password = hash;

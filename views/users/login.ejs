@@ -26,7 +26,7 @@
                         <div class="form-check">
                             <input type="checkbox" id="check">
                             <label for="check">
-                            <a href="#">Forget password?</a>
+                            <a href="#forgotPassword" data-toggle="modal">Forgot password?</a>
                         </div>
                         <div class="form-submit-1">
                             <input type="submit" value="Sign In" class="mc-btn btn-style-1">
@@ -49,3 +49,27 @@
     </div>
 </section>
 <!-- END / LOGIN -->
+
+<!-- Modal -->
+<div id="forgotPassword" style="margin-top:50px;" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+ <button type="button" class="close" data-dismiss="modal">&times;</button>
+ <h4 class="modal-title">Recover Password</h4>
+</div>
+<div class="modal-body">
+   <form id="frmForgotPassword" method="Post" action="/users/forgot-password">
+       <div class="form-group">
+         <label for="email">Email address:</label>
+         <input type="email" class="form-control" placeholder="Enter your email to recover password" name="email" id="email" required="required">
+       </div>
+       <button type="submit" class="btn btn-default">Submit</button>
+     </form>
+</div>
+</div>
+
+</div>
+</div>

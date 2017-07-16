@@ -100,6 +100,13 @@ router.get('/teaching',function (req,res) {
       res.render('users/teaching', data);
 });
 
+router.get('/forgot/:id',function (req,res) {
+    data = {
+        title: 'User - Reset Password'
+    },
+        res.render('users/resetPassword',data);
+});
+
 router.get('/signup',function (req,res) {
     data = {
         title: 'Signup - LMS'
@@ -186,6 +193,42 @@ router.post('/update/:id', upload.single('profilePicUrl'), function (req,res) {
         req.flash('success', 'SUCCESS! Profile updated successfully!');
         res.redirect('/users/dashboard');
       });
+});
+
+router.post('/forgot-password', (req,res) => {
+  Users.findOne({'email' : req.body.email}, function(err,user) {
+    console.log(user);
+    if(!user){
+      req.flash('error', 'ERROR! Your email is not registered to our system!');
+      res.redirect('/users/login');
+    } else {
+      sendEmail(req.body.email,user.firstName,user._id,'forgotPass');
+      req.flash('success', 'SUCCESS! Please check your email to reset password!');
+      res.redirect('/users/login');
+    }
+  });
+});
+
+router.post('/reset-password', (req,res) => {
+  const existUser = {
+       id : req.body.userId,
+       password : req.body.password
+  }
+  Users.findOne({'_id' : existUser.id}, function(err,user) {
+    if(err){
+      req.flash('error', 'ERROR! Your account is not registered in our system.');
+      res.redirect('/users/login');
+    } else {
+          Users.resetPassword(existUser,function (err,doc) {
+          if(err){
+            res.json({success : false, msg : 'Error occured,try again!'});
+          } else {
+            req.flash('success', 'SUCCESS! Your password has been reset successfully, please login.');
+            res.redirect('/users/login');
+          }
+      })
+    }
+  });
 });
 
 router.get('/logout', (req, res) => {
