@@ -4,31 +4,25 @@ const bcrypt = require('bcryptjs');
 const objectId = mongoose.Schema.ObjectId;
 const userSchema = mongoose.Schema({
     userId : objectId,
-    profilePicUrl : {
-        type : String
+    profilePicUrl : { type : String},
+    firstName : { type: String, required : true },
+    lastName : { type : String },
+    phone : { type : String },
+    email : { type : String },
+    password : { type : String },
+    address : { type : String },
+    bio : { type : String },
+    role : {
+        type : String,
+        default : 'user'
     },
-    firstName : {
-        type: String,
-        required : true
-    },
-    lastName : {
-        type : String
-    },
-    phone : {
-        type : String
-    },
-    email : {
-        type : String
-    },
-    password : {
-        type : String
-    },
-    address : {
-        type : String
-    },
-    bio : {
-        type : String
-    },
+    socialProfiles : [
+      { facebookUrl : String },
+      { instagramUrl : String },
+      { twitterUrl : String },
+      { linkedinUrl : String },
+      { googlePlusUrl : String },
+    ],
     isActive : {
         type : Boolean,
         default : true

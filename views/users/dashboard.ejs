@@ -19,7 +19,11 @@
                             <img src="<%= user.profilePicUrl ? '/assets/img/uploads/'+ user.profilePicUrl : '/images/team-13.jpg'%>" alt="">
                         </div>
                         <div class="choses-file up-file">
+                          <% if(!user.profilePicUrl) { %>
                             <input type="file" name="profilePicUrl">
+                            <% } else { %>
+                              <input type="hidden" name="profilePicUrl" value="<%= user.profilePicUrl %>">
+                              <% } %>
                             <a href="#" class="mc-btn btn-style-6">Change image</a>
                         </div>
                     </div>
